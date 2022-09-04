@@ -1,0 +1,197 @@
+*{
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  
+html{
+    margin: 0;
+    
+    body{
+      margin: 0;
+    }
+}
+  
+header {
+    .h-container {
+        display: flex;
+        justify-content: space-between;
+        flex-flow: row nowrap;
+        .logo {
+
+            background: url('../logos/icon-left-font-monochrome-black.png') no-repeat;
+            width: 250px;
+            height: 80px;
+            background-size: 200px;
+            background-position: center;
+        } 
+        nav {
+            ul {
+                display: flex;
+                list-style-type: none;
+                flex-direction: row;
+                margin: 0px;
+                padding: 0px;
+                li {
+                    padding: 15px;
+                    padding-bottom: 1px;
+                    line-height: 45px;
+                    border-top: transparent solid 3px;
+                    
+                    i{
+                        font-size: 20px;
+                    }
+                    i:hover{
+                        color: blue;
+                        cursor: pointer;
+                    }
+
+                    a {
+                        font-size: 14px;
+                        color: #444444;
+                        text-decoration: none;
+                    }
+                }
+            }
+            a:hover {
+                color: #0065FC;
+               
+            }   
+            
+            .menu-link:hover {
+                border-bottom: #0065FC solid 3px;
+                
+            }
+
+        }  
+    }
+}      
+main{
+        
+    #index { 
+    }
+
+	#users { 
+    
+	}
+
+	#posts { 
+        background: #eeeeee;
+
+		.posts__container {
+		    padding: 2em;
+
+			.post { 
+                padding: 2em;
+                background: white;
+                box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+                border-radius: 1em;
+
+				.post__top {
+                    display: flex;
+                    column-gap: .5em;
+
+                    .avatar { 
+
+                        img { 
+                            border-radius: 100%;
+                            width: 3em;
+                            height: 3em;
+                            object-fit: cover;
+                            object-position: center;
+                        }
+                    }
+
+                    .about { 
+                        display: flex;
+                        flex-flow: column nowrap;
+                        justify-content: center;
+    
+                        .name { 
+                            margin: 0;
+                        }
+
+                        .date { 
+
+                        }
+                    }
+
+                    .button--options { 
+
+                        i { 
+                            color: blue;
+                        }
+                    }
+                }
+
+                .post__content { 
+
+                    .text { 
+
+                        p { 
+
+                        }
+                    }
+
+                    .media { 
+
+                        img { 
+                            object-fit: cover;
+                            object-position: center;
+                            width: 100%;
+                            max-height: 20em;
+                        }
+                    }
+                }
+
+                
+                .post__bottom {
+                    padding: 1em 0 0;
+
+                    .buttons {
+                    display: flex;
+                        column-gap: 1em;
+            
+                        .button{
+                            cursor: pointer;
+                        }
+                        
+                    }
+            
+                    .thumbs { 
+                        display: flex;
+                        column-gap: 1em;
+
+                        .button--thumb { 
+
+                            i { 
+
+                            }
+
+                            span { 
+
+                            }
+                        }
+                    }
+
+                    .button--comment { 
+
+                        i { 
+
+                        }
+
+                        span { 
+
+                        }
+                    }
+                }
+                    
+			}
+		}
+
+		
+	}
+
+}
+    
+
+

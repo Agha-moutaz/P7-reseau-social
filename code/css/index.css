@@ -1,0 +1,111 @@
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+html {
+  margin: 0;
+}
+html body {
+  margin: 0;
+}
+
+header .h-container {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row nowrap;
+}
+header .h-container .logo {
+  background: url("../logos/icon-left-font-monochrome-black.png") no-repeat;
+  width: 250px;
+  height: 80px;
+  background-size: 200px;
+  background-position: center;
+}
+header .h-container nav ul {
+  display: flex;
+  list-style-type: none;
+  flex-direction: row;
+  margin: 0px;
+  padding: 0px;
+}
+header .h-container nav ul li {
+  padding: 15px;
+  padding-bottom: 1px;
+  line-height: 45px;
+  border-top: transparent solid 3px;
+}
+header .h-container nav ul li i {
+  font-size: 20px;
+}
+header .h-container nav ul li i:hover {
+  color: blue;
+  cursor: pointer;
+}
+header .h-container nav ul li a {
+  font-size: 14px;
+  color: #444444;
+  text-decoration: none;
+}
+header .h-container nav a:hover {
+  color: #0065FC;
+}
+header .h-container nav .menu-link:hover {
+  border-bottom: #0065FC solid 3px;
+}
+
+main #posts {
+  background: #eeeeee;
+}
+main #posts .posts__container {
+  padding: 2em;
+}
+main #posts .posts__container .post {
+  padding: 2em;
+  background: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  border-radius: 1em;
+}
+main #posts .posts__container .post .post__top {
+  display: flex;
+  column-gap: 0.5em;
+}
+main #posts .posts__container .post .post__top .avatar img {
+  border-radius: 100%;
+  width: 3em;
+  height: 3em;
+  object-fit: cover;
+  object-position: center;
+}
+main #posts .posts__container .post .post__top .about {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+}
+main #posts .posts__container .post .post__top .about .name {
+  margin: 0;
+}
+main #posts .posts__container .post .post__top .button--options i {
+  color: blue;
+}
+main #posts .posts__container .post .post__content .media img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  max-height: 20em;
+}
+main #posts .posts__container .post .post__bottom {
+  padding: 1em 0 0;
+}
+main #posts .posts__container .post .post__bottom .buttons {
+  display: flex;
+  column-gap: 1em;
+}
+main #posts .posts__container .post .post__bottom .buttons .button {
+  cursor: pointer;
+}
+main #posts .posts__container .post .post__bottom .thumbs {
+  display: flex;
+  column-gap: 1em;
+}
+
+/*# sourceMappingURL=index.css.map */

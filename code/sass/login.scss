@@ -1,0 +1,145 @@
+*{
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  
+html{
+    margin: 0;
+    body {
+        margin: 0px;
+    }
+    
+}
+
+header {
+    .h-container {
+        display: flex;
+        justify-content: space-between;
+        flex-flow: row nowrap;
+        .logo {
+
+            background: url('../logos/icon-left-font-monochrome-black.png') no-repeat;
+            width: 250px;
+            height: 80px;
+            background-size: 200px;
+            background-position: center;
+        } 
+        nav {
+            ul {
+                display: flex;
+                list-style-type: none;
+                flex-direction: row;
+                margin: 0px;
+                padding: 0px;
+                li {
+                    padding: 15px;
+                    padding-bottom: 1px;
+                    line-height: 45px;
+                    border-top: transparent solid 3px;
+
+                    a {
+                        font-size: 14px;
+                        color: #444444;
+                        text-decoration: none;
+                    }
+                }
+            }
+            a:hover {
+                color: #0065FC;
+               
+            }   
+            
+            .menu-link:hover {
+                border-bottom: #0065FC solid 3px;
+                
+            }
+
+        }  
+    }
+}       
+
+    
+#auth { 
+    background: #478ccc;
+    
+    section.form {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        align-items: center;
+        min-height: 50em;
+
+        .form__container { 
+            padding: 2em;
+            background: white;
+            box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+            max-width: 25em;
+            width: 100%;
+            border-radius: .5em;
+        
+            .top { 
+
+                h1 { 
+                    margin:0 0 1em;
+                    color: #444444;
+                }
+            }
+        }
+
+        .fields { 
+
+            form { 
+                display: flex;
+                flex-flow: column;
+                row-gap: 1em;
+        
+                .field {
+                    display: flex;
+                    flex-flow: column ;
+                    row-gap: .5em;
+
+                    input { 
+                        border: 1px solid #dededede;
+                        padding: .5em;
+                        line-height: 2em;
+                    }
+        
+                    button{
+                        cursor: pointer;
+                        padding: 1em 0;
+                        color: white;
+                        border: none;
+                        border-radius: .5em;
+                        background: #478ccc;
+                    }
+                }
+            }
+        }
+        
+
+        .form__links { 
+
+            ul { 
+            list-style: none;
+            padding: 1em;
+            margin: 0;
+            display: flex;
+            flex-flow: column;
+            row-gap: .5em;
+        
+                li { 
+                color: #DFEFEFEE;
+                text-align: center;
+                    a { 
+                        color: white;
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+    
+    
+            
