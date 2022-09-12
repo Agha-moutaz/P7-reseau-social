@@ -53,59 +53,107 @@ header .h-container nav .menu-link:hover {
   border-bottom: #0065FC solid 3px;
 }
 
-main #posts {
-  background: #eeeeee;
+#index {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-top: 40px;
 }
-main #posts .posts__container {
+
+#users {
+  width: 200px;
+}
+#users .perso {
+  padding: 3px;
+}
+#users .perso img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  max-height: 20em;
+}
+#users .perso p {
+  font-size: 1em;
+  padding-left: 2em;
+}
+#users .control ul {
+  display: flex;
+  list-style-type: none;
+  flex-direction: column;
+  margin: 0px;
+  padding: 0px;
+}
+#users .control ul li {
+  padding: 15px;
+  padding-bottom: 1px;
+  line-height: 45px;
+  border-top: transparent solid 3px;
+}
+#users .control ul li i {
+  font-size: 20px;
+}
+#users .control ul li i:hover {
+  color: blue;
+  cursor: pointer;
+}
+#users .new-post button {
+  background-color: #0065FC;
+  color: white;
+}
+
+#posts {
+  background: eeeeee;
+  width: 500px;
+}
+#posts .posts__container {
   padding: 2em;
 }
-main #posts .posts__container .post {
+#posts .posts__container .post {
   padding: 2em;
   background: white;
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   border-radius: 1em;
 }
-main #posts .posts__container .post .post__top {
+#posts .posts__container .post .post__top {
   display: flex;
   column-gap: 0.5em;
 }
-main #posts .posts__container .post .post__top .avatar img {
+#posts .posts__container .post .post__top .avatar img {
   border-radius: 100%;
   width: 3em;
   height: 3em;
   object-fit: cover;
   object-position: center;
 }
-main #posts .posts__container .post .post__top .about {
+#posts .posts__container .post .post__top .about {
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
 }
-main #posts .posts__container .post .post__top .about .name {
+#posts .posts__container .post .post__top .about .name {
   margin: 0;
 }
-main #posts .posts__container .post .post__top .button--options i {
+#posts .posts__container .post .post__top .button--options i {
   color: blue;
 }
-main #posts .posts__container .post .post__content .media img {
+#posts .posts__container .post .post__content .media img {
   object-fit: cover;
   object-position: center;
   width: 100%;
   max-height: 20em;
 }
-main #posts .posts__container .post .post__bottom {
+#posts .posts__container .post .post__bottom {
   padding: 1em 0 0;
 }
-main #posts .posts__container .post .post__bottom .buttons {
+#posts .posts__container .post .post__bottom .buttons {
   display: flex;
   column-gap: 1em;
 }
-main #posts .posts__container .post .post__bottom .buttons .button {
+#posts .posts__container .post .post__bottom .buttons .button {
   cursor: pointer;
 }
-main #posts .posts__container .post .post__bottom .thumbs {
+#posts .posts__container .post .post__bottom .thumbs {
   display: flex;
   column-gap: 1em;
 }
 
-/*# sourceMappingURL=index.css.map */
+/*# sourceMappingURL=home.css.map */

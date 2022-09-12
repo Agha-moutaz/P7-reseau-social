@@ -18,7 +18,7 @@ header {
         flex-flow: row nowrap;
         .logo {
 
-            background: url('../logos/icon-left-font-monochrome-black.png') no-repeat;
+            background: url('../../public/img/icon-left-font-monochrome-black.png') no-repeat;
             width: 250px;
             height: 80px;
             background-size: 200px;
@@ -65,23 +65,77 @@ header {
         }  
     }
 }      
-main{
-        
-    #index { 
+#index{
+    display: flex;
+    flex-flow: row nowrap;
+    margin-top: 40px;  
+    background-color: #478ccc;        
+}
+#users { 
+    width: 300px;
+    background-color: white;
+    border-radius: 2em;
+    .perso {
+        padding: 3px;
+        display: flex;
+        flex-flow: row nowrap;
+        img{
+            border-radius: 100%;
+            width: 3em;
+            height: 3em;
+            object-fit: cover;
+            object-position: center;
+        }
+        .name { 
+            
+        }
     }
+    .control{
+        ul {
+            display: flex;
+            list-style-type: none;
+            flex-direction: column;
+            margin: 0px;
+            padding: 0px;
+            li {
+                padding: 15px;
+                padding-bottom: 1px;
+                line-height: 45px;
+                border-top: transparent solid 3px;
+                
+                i{
+                    font-size: 20px;
+                    
+                }
+                i:hover{
+                    color: blue;
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
+        
+        .new-post{
+            button{
+                background-color: #0065FC;
+                color: white;
+            }
 
-	#users { 
-    
-	}
+        }
 
 	#posts { 
         background: #eeeeee;
+        width: 500px;
+        border-radius: 2em;
 
 		.posts__container {
 		    padding: 2em;
+           
 
 			.post { 
                 padding: 2em;
+                margin: 2em 0;
                 background: white;
                 box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
                 border-radius: 1em;
@@ -154,6 +208,16 @@ main{
                         .button{
                             cursor: pointer;
                         }
+                        .download{
+                           margin-left: 300px;
+                           margin-top: 2em;
+                           cursor: pointer;
+                            padding: .5em 1em;
+                            color: white;
+                            border: none;
+                            border-radius: .5em;
+                            background: #478ccc;
+                        }
                         
                     }
             
@@ -191,7 +255,7 @@ main{
 		
 	}
 
-}
+
     
 
 
