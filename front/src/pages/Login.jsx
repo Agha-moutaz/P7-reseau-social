@@ -1,4 +1,5 @@
 import { useState } from "react";
+import  { useNavigate } from "react-router-dom"
 import '../scss/login.scss'
 import { getAPI, setToken } from "../utils/api";
 import { login as loginValidator } from "../validators/login";
@@ -9,21 +10,25 @@ function Login(){
         password: ""
     })
 
+    const navigate = useNavigate();
+    
     const submit = function(event){
         event.preventDefault()
         event.stopPropagation()
 
         //validations
-        const {error, value} = loginValidator.validate(fields, { abortEarly: false })
-        if(error){
-            return alert('error')
-        }
-
-        getAPI().post('/login', value)
+        // const {error, value} = loginValidator.validate(fields, { abortEarly: false })
+        // if(error){
+        //     return alert('error')
+        // }
+        
+        getAPI().post('/api/user/login', fields)
             .then(function(res){
                 setToken(res.data.token)
+                navigate('/')
             })
             .catch(function(res){
+                console.log(res)
                 alert('error')
             })
     }
@@ -45,8 +50,8 @@ function Login(){
                                 placeholder="email@exemple.org" 
                                 onChange={function(event){
                                     setFields({
+                                        ...fields,
                                         email: event.target.value,
-                                        ...fields
                                     })
                                 }}
                                 />
@@ -59,8 +64,8 @@ function Login(){
                                 placeholder="*********" 
                                 onChange={function(event){
                                     setFields({
+                                        ...fields,
                                         password: event.target.value,
-                                        ...fields
                                     })
                                 }}/>
                         </div>

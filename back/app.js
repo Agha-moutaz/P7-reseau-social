@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const commentRoutes = require ('./route/comment');
+const postRoutes = require ('./route/post');
 const userRoutes = require ('./route/user');
 const path = require('path');
 
@@ -24,9 +24,9 @@ app.use(express.json());
 //     next();
 // })
 
-app.use('/post', commentRoutes);
+app.use('/api/post', postRoutes);
 app.use('/api/user', userRoutes);
-app.use('/images', express.static(path.join(__dirname,'images')))
+app.use('/api/images', express.static(path.join(__dirname,'images')))
 
 
 

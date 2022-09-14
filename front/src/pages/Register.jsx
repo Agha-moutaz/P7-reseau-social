@@ -1,4 +1,5 @@
 import { useState } from "react";
+import  { useNavigate } from "react-router-dom"
 import '../scss/login.scss'
 import { getAPI, setToken } from "../utils/api";
 import { login as loginValidator } from "../validators/login";
@@ -9,7 +10,7 @@ function Register(){
         password: "",
         name: ""
     })
-
+    const navigate = useNavigate();
     const submit = function(event){
         event.preventDefault()
         event.stopPropagation()
@@ -21,7 +22,9 @@ function Register(){
 
         getAPI().post('/api/user/signup', value)
             .then(function(res){
-                setToken(res.data.token)
+                //setToken(res.data.token)
+                alert('compte crée!')
+                navigate('/login')
             })
             .catch(function(res){
                 alert('error')

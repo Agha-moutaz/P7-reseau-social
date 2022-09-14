@@ -201,16 +201,25 @@ header {
                 .post__bottom {
                     padding: 1em 0 0;
 
+                    .upload{
+                        display: flex;
+                        align-items:center;
+                        justify-content: center;
+                        cursor: pointer;
+                    }
+
                     .buttons {
-                    display: flex;
+                        display: flex;
+                        flex-direction: row nowrap;
                         column-gap: 1em;
+                        justify-content: end;
             
                         .button{
                             cursor: pointer;
                         }
                         .download{
-                           margin-left: 300px;
-                           margin-top: 2em;
+                        //    margin-left: 300px;
+                        //    margin-top: 2em;
                            cursor: pointer;
                             padding: .5em 1em;
                             color: white;

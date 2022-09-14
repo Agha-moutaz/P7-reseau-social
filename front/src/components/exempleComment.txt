@@ -1,0 +1,12 @@
+import { getAPI } from "../../../front/src/utils/api"
+
+function getComments(postId){
+getAPI().get("/api/comment/"+postId)
+
+}
+
+
+
+getComments(post.id).map(comment=>{
+home jsx
+})
