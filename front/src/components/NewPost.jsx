@@ -1,6 +1,45 @@
+import { useState, useContext } from "react";
+import { getAPI } from "../utils/api";
+import {
+    faPaperclip,
+  } from '@fortawesome/free-solid-svg-icons'
+  import { postValidator } from "../validators/post";
+  import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+  import {HomeContext} from '../app/context'
 
 
 function NewPost() {
+
+    const { dispatchPostEvent } = useContext(HomeContext);
+
+    const [fields, setFields] = useState({
+        text: "",
+    })
+
+    const savePost = function(event){
+        event.preventDefault()
+        event.stopPropagation()
+        //validations
+        const {error, value} = postValidator.validate(fields, { abortEarly: false })
+
+        if(error){
+            return alert('error')
+        }
+
+        getAPI().post('/api/post/', value)
+            .then(function(res){
+                dispatchPostEvent('POST_ADDED', res.data)
+                setFields( {
+                    ...fields,
+                    text: ""
+                })
+                alert('success')
+                
+            })
+            .catch(function(res){
+                alert('error')
+            })
+    }
 
     return <>
         <article className="post">
@@ -19,12 +58,22 @@ function NewPost() {
             </div>
             <div className="post__content">
                 <div className="text">
-                    <input />
+                    <textarea id="textbox" rows="3" cols="50"
+                        value={fields.text}
+                        onChange={function(event){
+                            setFields( {
+                                ...fields,
+                                text: event.target.value,
+                            })
+                        }}
+                    />
                 </div>
             </div>
             <div className="post__bottom">
                 <div className="buttons">
-                    <button className="download">upload</button>
+                    <div className="upload"><FontAwesomeIcon icon={faPaperclip} /></div>
+                    <button className="download" onClick={savePost}>envoyer</button>
+                    
                 </div>
             </div>
         </article>
