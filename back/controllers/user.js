@@ -23,7 +23,7 @@ exports.signup = (req, res, next) => {
 exports.login = (req, res, next) => {
 User.findOne({email: req.body.email})
 .then(user => {
-    if (Object.keys(user).length === 0) {
+    if (!user) {
         res.status(401).json({message: ' paire identifiant/mot de passe incorrecte'});
     } else {
         bcrypt.compare(req.body.password, user.password)
@@ -48,6 +48,7 @@ User.findOne({email: req.body.email})
     }
 })
 .catch(error => {
+    console.log(error)
     res.status(500).json({error})
 })
 };

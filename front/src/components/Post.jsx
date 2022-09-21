@@ -24,6 +24,7 @@ function PostContainer(props) {
 
                 <div className="about">
                     <h3 className="name">Dominic Simmons</h3>
+                    {props.post.createdAt}
                     <span className="date">{moment(props.post.createdAt).fromNow()}</span>
                 </div>
 

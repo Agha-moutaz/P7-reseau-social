@@ -1,5 +1,9 @@
 import Joi from 'joi'
 
+const name = Joi.string()
+    .min(1)
+    .max(100)
+    .required()
 
 const email = Joi.string()
     .email({ tlds: {allow: false} })
@@ -10,7 +14,8 @@ const password = Joi.string()
     .regex(/^\w{6,12}$/)
     .required()
 
-export const login = Joi.object({
+export const registerValidator = Joi.object({
     email,
     password,
+    name,
 })

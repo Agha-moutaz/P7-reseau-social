@@ -10,7 +10,7 @@ exports.createPost = (req, res, next) => {
     //delete postObject._userId;
     const post = new Post({
         ...postObject,
-        createdAt: new Date().getTime(),
+        createdAt: new Date(),
         userId: req.auth.userId,
        // imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
     });

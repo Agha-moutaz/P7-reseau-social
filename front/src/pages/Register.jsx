@@ -2,7 +2,7 @@ import { useState } from "react";
 import  { useNavigate } from "react-router-dom"
 import '../scss/login.scss'
 import { getAPI, setToken } from "../utils/api";
-import { login as loginValidator } from "../validators/login";
+import { registerValidator } from "../validators/register";
 
 function Register(){
     const [fields, setFields] = useState({
@@ -15,8 +15,9 @@ function Register(){
         event.preventDefault()
         event.stopPropagation()
         //validations
-        const {error, value} = loginValidator.validate(fields, { abortEarly: false })
+        const {error, value} = registerValidator.validate(fields, { abortEarly: false })
         if(error){
+        return console.log(error)
             return alert('error')
         }
 

@@ -10,7 +10,7 @@ const postSchema = mongoose.Schema({
     dislikes:{ type: Number, default:0},
     usersLiked:{ type: [String]},
     usersDisliked:{ type: [String]},
-    createdAt: {type: Number}
+    createdAt: {type: Date}
    // comments: { type: [Comment]},
 },{timestamps: true});
 
