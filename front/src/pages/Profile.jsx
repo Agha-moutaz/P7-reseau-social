@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import '../scss/login.scss'
 import { getAPI } from "../utils/api";
 import { register as registerValidator } from "../validators/register";
-
+import Modal from 'react-modal'
 
 
 
@@ -59,7 +59,7 @@ function Profile() {
       }
     } fetchUser();
   }, []);
-
+  const [isOpenModalDeleteUser, setIsOpenModalDeleteUser] = useState(false)
   const openInputFile = function(event) {
     fileRef.current.click();
     event.preventDefault();
@@ -76,11 +76,39 @@ function Profile() {
           console.log(err)
         })
     }
+    const toggelModalDeleteUser = () => {
+      setIsOpenModalDeleteUser(!setIsOpenModalDeleteUser)
+    }
+    const modalstyle= {
+      content: {
 
+        width: '600px',
+        height: '200px',
+        top: '50%',
+        left: '50%',
+        right: 'auto',
+        bottom: 'auto',
+        marginRight: '-50%',
+        transform: 'translate(-50%, -50%)',
+      }
+    }
 
 
   return <>
     <main id="auth">
+    <Modal 
+            isOpen={isOpenModalDeleteUser}
+            style={modalstyle}
+          >
+          
+          <div className="post__supprission"> 
+            <h2>Voulez vous supprimer votre compte?</h2>
+            <div className="post__choix">
+              <button onClick={deleteUser}>Oui</button>
+              <button onClick={toggelModalDeleteUser}>Non</button>
+            </div>
+          </div>
+          </Modal>
       <section id="register" className="form">
         <div className="form__container">
           <div className="top">

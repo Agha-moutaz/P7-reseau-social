@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { getAPI } from "../utils/api";
-
+import '../scss/userlist.scss'
 
 
 function UserList() {

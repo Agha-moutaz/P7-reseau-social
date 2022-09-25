@@ -4,6 +4,7 @@ import {
     faHeartBroken,
     faComment,
     faClose,
+    
     faFileEdit,
 } from '@fortawesome/free-solid-svg-icons'
 import moment from 'moment';
@@ -21,7 +22,7 @@ function PostContainer(props) {
   const [likeNumber, setLikeNumber] = useState()
   const [dislikeNumber, setDislikeNumber] = useState()
   const [isOpenModalDeletePost, setIsOpenModalDeletePost] = useState(false)
-
+  const [isOpenModalModifyPost, setIsOpenModalModifyPost] = useState(false)
   useEffect(() => {
     setLikeNumber(props.post.likes)
     setDislikeNumber(props.post.dislikes)
@@ -63,14 +64,14 @@ function PostContainer(props) {
           .then(function (res) {
             console.log(res.data)
           })
-          .catch(function (err) {
-            console.log(err)
+          .catch(function (error) {
+            console.log(error)
           })
       }
 
-      // const toggelModalModifyPost = () => {
-      //   setIsOpenModalModifyPost(!isOpenModalModifyPost)
-      // }
+      const toggelModalModifyPost = () => {
+        setIsOpenModalModifyPost(!isOpenModalModifyPost)
+      }
       const modalstyle= {
         content: {
 
@@ -99,7 +100,7 @@ function PostContainer(props) {
             </div>
           </div>
           </Modal>
-          {/* <Modal 
+          <Modal 
             isOpen={isOpenModalModifyPost}
             style={modalstyle}
           >
@@ -110,11 +111,10 @@ function PostContainer(props) {
               <button onClick={toggelModalModifyPost}>Non</button>
             </div>
           </div>
-          </Modal> */}
+          </Modal>
         <div className="post__edition"> 
           <div className="bottom__top">
-              <FontAwesomeIcon icon={ faFileEdit} //onClick={ toggelModalModifyPost}// 
-               />   
+              <FontAwesomeIcon icon={ faFileEdit} onClick={ toggelModalModifyPost}/>   
           </div>
           <div className="bottom__top">
               <FontAwesomeIcon icon={ faClose} onClick={toggelModalDeletePost}  />
