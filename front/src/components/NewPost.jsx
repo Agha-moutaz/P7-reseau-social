@@ -1,81 +1,96 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import FormData from 'form-data'
 import { getAPI } from "../utils/api";
-import {
-    faPaperclip,
-  } from '@fortawesome/free-solid-svg-icons'
-  import { postValidator } from "../validators/post";
-  import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-  import {HomeContext} from '../app/context'
+import { faPaperclip} from '@fortawesome/free-solid-svg-icons'
+import { postValidator } from "../validators/post";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {AppContext, HomeContext} from '../app/context'
 
 
 function NewPost() {
 
-    const { dispatchPostEvent } = useContext(HomeContext);
+    let fileRef = useRef(null);
 
+    const { dispatchPostEvent } = useContext(HomeContext);
+    const {currentUser} = useContext(AppContext);
+
+    const navigate = useNavigate(); 
     const [fields, setFields] = useState({
         text: "",
     })
 
-    const savePost = function(event){
+    const openInputFile = function(event) {
+        fileRef.current.click()
+    }
+
+    const { dispatchLoginEvent } = useContext(AppContext);
+    const handleApiError = (res) => {
+        if(res.response.status == 401) {
+            dispatchLoginEvent('LOGIN_EXPIRED', {})
+            navigate('/login')       
+        }
+    }
+
+    const  savePost = async function(event) {
         event.preventDefault()
         event.stopPropagation()
         //validations
         const {error, value} = postValidator.validate(fields, { abortEarly: false })
-
         if(error){
-            return alert('error')
+            //return alert('error')
         }
+        
+        let formData = new FormData();
+        formData.append("image", fileRef.current.files[0]);
+        formData.append("text", value.text);
 
-        getAPI().post('/api/post/', value)
-            .then(function(res){
-                dispatchPostEvent('POST_ADDED', res.data)
-                setFields( {
-                    ...fields,
-                    text: ""
-                })
-                alert('success')
-                
-            })
-            .catch(function(res){
-                alert('error')
-            })
+        try {
+            const result = await getAPI('formData').post('/api/post/', formData);
+            dispatchPostEvent('POST_ADDED', result.data)
+            setFields( {...fields, text: "" })
+            fileRef.current.value = ""
+        } catch (error) {
+            handleApiError(error)
+            alert('error')
+        }
     }
 
     return <>
-        <article className="post">
+        <article className="post new__post">
             <div className="post__top">
                 <div className="avatar">
-                    <img src="https://images.pexels.com/photos/1933873/pexels-photo-1933873.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
+                    <img src={currentUser.avatar} alt="" />
                 </div>
-
-                <div className="about">
-                <h3 className="name">Dominic Simmons</h3>
+                <div className="post__content">
+                    <div className="text">
+                        <textarea 
+                            rows="2" cols="45"
+                            placeholder="Quoi de neuf?"
+                            value={fields.text}
+                            onChange={function(event){
+                                setFields( {
+                                    ...fields,
+                                    text: event.target.value,
+                                })
+                            }}
+                        />
+                    </div>
                 </div>
-
-                <div className="button--options">
-                    <i></i>
-                </div>
-            </div>
-            <div className="post__content">
-                <div className="text">
-                    <textarea id="textbox" rows="3" cols="50"
-                        value={fields.text}
-                        onChange={function(event){
-                            setFields( {
-                                ...fields,
-                                text: event.target.value,
-                            })
-                        }}
-                    />
-                </div>
-            </div>
-            <div className="post__bottom">
+                <div className="post__bottom">
                 <div className="buttons">
-                    <div className="upload"><FontAwesomeIcon icon={faPaperclip} /></div>
-                    <button className="download" onClick={savePost}>envoyer</button>
-                    
+                    <input 
+                        className="hidden"
+                        name="image"
+                        ref={fileRef}  
+                        type="file"
+                        accept="image/png, image/jpeg" />
+                    <div className="upload" onClick={openInputFile}><FontAwesomeIcon icon={faPaperclip} /></div>
+                    <button className="publish" onClick={savePost}>Publier</button>
                 </div>
             </div>
+            </div>
+
         </article>
     </>
 }

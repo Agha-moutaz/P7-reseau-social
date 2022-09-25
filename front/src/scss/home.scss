@@ -1,3 +1,7 @@
+$gray: #f1f1f1;
+$blue: #478ccc;
+$grayDark: #ddd;
+
 *{
     font-family: 'Roboto', sans-serif;
   }
@@ -10,7 +14,15 @@ html{
       margin: 0;
     }
 }
-  
+
+textarea:focus-visible, textarea:focus {
+    outline: none;
+    border-color: $blue !important;
+}
+.hidden {
+    display: none;
+}
+
 header {
     .h-container {
         display: flex;
@@ -69,12 +81,14 @@ header {
     display: flex;
     flex-flow: row nowrap;
     margin-top: 40px;  
-    background-color: #478ccc;        
+   // background-color: $blue;        
 }
 #users { 
     width: 300px;
-    background-color: white;
+    min-height: 500px;
+    background-color: $gray;
     border-radius: 2em;
+    padding: 1em;
     .perso {
         padding: 3px;
         display: flex;
@@ -87,7 +101,7 @@ header {
             object-position: center;
         }
         .name { 
-            
+            list-style-type: none;
         }
     }
     .control{
@@ -125,20 +139,57 @@ header {
         }
 
 	#posts { 
-        background: #eeeeee;
-        width: 500px;
-        border-radius: 2em;
+        //background: $gray;
+        width: 600px;
+       // border-radius: 2em;
 
 		.posts__container {
-		    padding: 2em;
+		    padding: 0 0 0 2em;
            
+            .post.new__post {
+                box-shadow: none;
+                background-color: $gray;
+                .post__top {
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
 
 			.post { 
                 padding: 2em;
-                margin: 2em 0;
+                margin: 0 0 2em 0;
                 background: white;
                 box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
                 border-radius: 1em;
+
+                .post__supprission{
+                    font-size: 32px;
+
+                        h2{
+                            font-size: 32px;
+                        }
+                    .post__choix{
+                        display: flex;
+                        justify-content: center;
+                        
+                    }
+                    button{
+                    padding-left: 15px;
+                    }
+                }
+
+                .post__edition {
+                    display: flex;
+                    flex-flow: row nowrap;
+                    justify-content: flex-end;
+
+                .bottom__top{
+                    margin-left: 1em;
+                    cursor: pointer;
+                    
+
+                }
+                }
 
 				.post__top {
                     display: flex;
@@ -164,9 +215,6 @@ header {
                             margin: 0;
                         }
 
-                        .date { 
-
-                        }
                     }
 
                     .button--options { 
@@ -179,11 +227,15 @@ header {
 
                 .post__content { 
 
-                    .text { 
+                    .text textarea { 
+                        border-radius: 2em;
+                        border-color: $grayDark;
+                        padding:  1em 0 0.5em 1em;
+                        resize: none;
+                    }
 
-                        p { 
-
-                        }
+                    .text textarea::placeholder { 
+                        font-size: 1.5em;
                     }
 
                     .media { 
@@ -203,6 +255,8 @@ header {
 
                     .upload{
                         display: flex;
+                        color: $blue;
+                        font-size: 1.5em;
                         align-items:center;
                         justify-content: center;
                         cursor: pointer;
@@ -217,7 +271,7 @@ header {
                         .button{
                             cursor: pointer;
                         }
-                        .download{
+                        .publish{
                         //    margin-left: 300px;
                         //    margin-top: 2em;
                            cursor: pointer;
@@ -225,7 +279,8 @@ header {
                             color: white;
                             border: none;
                             border-radius: .5em;
-                            background: #478ccc;
+                            background: $blue;
+                            font-size: 1.1em;
                         }
                         
                     }

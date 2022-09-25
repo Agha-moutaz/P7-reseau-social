@@ -1,18 +1,15 @@
 const express = require('express');
-const post = require('../models/Post');
 const fs = require('fs');
 const Post = require('../models/Post');
-const router = express.Router();
 
 exports.createPost = (req, res, next) => {
-    console.log(req.body)
     const postObject = req.body;
     //delete postObject._userId;
     const post = new Post({
         ...postObject,
-        createdAt: new Date(),
-        userId: req.auth.userId,
-       // imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
+        createdAt: new Date().getTime(),
+        user: req.auth.userId,
+        imageUrl: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : null
     });
     post.save()
         .then(() => res.status(201).json(post)) 
@@ -29,19 +26,14 @@ exports.getOnePost = (req, res, next) => {
 };
 
 exports.getAllPosts = (req, res, next) => {
-    Post.find()
+    Post.find().populate('user').sort({createdAt: -1}).exec()
         .then((Posts) => {
-            res.status(201).json(Posts)
-            console.log(Posts)
-        }
-        )
-        
+            res.status(200).json(Posts)
+        })
         .catch(error =>{
-            console.log(error);
             res.status(400).json({error});
         });  
 };
-
 
 exports.modifyPost = async(req, res, next) => {
     const postObject = req.file ? {
@@ -98,63 +90,81 @@ exports.deletePost = (req, res, next) => {
         .catch(error => {res.status(500).json({ error})});
 };
 
-            
+
 
 exports.likePost = async (req, res, next) => {
     try{
        
         const onePost = await Post.findOne({ _id: req.params.id})
         
-        if (!onePost.usersLiked.includes(req.body.userId) && req.body.like === 1){
-            await Post.updateOne(
-                {_id :req.params.id}, 
-                {
-                    $inc: {likes: 1},
-                    $push: {usersLiked: req.body.userId}
-                }
-            )
-        
-            return res.status(201).json({message: 'post liked +1'})
-            
+        if(req.body.like != 1 && req.body.like != -1) {
+            return res.status(401).json({message: 'unauthorized'})
         }
-        if(onePost.usersLiked.includes(req.body.userId) && req.body.like === 0){
-            await Post.updateOne(
-                {_id :req.params.id}, 
-                {
-                    $inc: {likes: -1},
-                    $pull: {usersLiked: req.body.userId},
-                }
-            )
-            return res.status(201).json({message: 'post liked 0'})
-            
+
+        if (!onePost.usersLiked.includes(req.auth.userId) && req.body.like === 1){
+            await likePost();
+            if(onePost.usersDisliked.includes(req.auth.userId)) {
+                await removeDislikePost()           
+            }            
+        }
+        if(onePost.usersLiked.includes(req.auth.userId) && req.body.like === 1){
+            await removeLikePost()          
         }
                 
-        if (!onePost.usersDisliked.includes(req.body.userId) && req.body.like === -1){
-            await Post.updateOne(
-                {_id :req.params.id}, 
-                {
-                    $inc: {dislikes: 1},
-                    $push: {usersDisliked: req.body.userId},
-                }
-            )
-            return res.status(201).json({message: 'post disliked +1'})
-            
+        if (!onePost.usersDisliked.includes(req.auth.userId) && req.body.like === -1){
+            await dislikePost()
+            if (onePost.usersLiked.includes(req.auth.userId)){
+                await removeLikePost() 
+            }     
         }
-        if(onePost.usersDisliked.includes(req.body.userId) && req.body.like === 0) {
-            await Post.updateOne(
-                {_id :req.params.id}, 
-                {
-                    $inc: {dislikes: -1},
-                    $pull: {usersDisliked: req.body.userId}
-                }
-            )
-            return res.status(201).json({message: 'post disliked 0'})
-            
+        if(onePost.usersDisliked.includes(req.auth.userId) && req.body.like === -1) {
+            await removeDislikePost()           
         }
-        throw "unknown action"
+
+        const postUpdated = await Post.findOne({ _id: req.params.id})
+        return res.status(201).json({message: 'post liked +1', dislikes: postUpdated.dislikes, likes: postUpdated.likes})
+
+        
     } 
     catch(error) {
         console.log(error);
         res.status(500).json({ error})
+    }
+
+    async function likePost(){
+        await Post.updateOne(
+            {_id :req.params.id}, 
+            {
+                $inc: {likes: 1},
+                $push: {usersLiked: req.auth.userId}
+            }
+        )
+    }
+    async function removeLikePost(){
+        await Post.updateOne(
+            {_id :req.params.id}, 
+            {
+                $inc: {likes: -1},
+                $pull: {usersLiked: req.auth.userId},
+            }
+        )       
+    }
+    async function dislikePost(){
+        await Post.updateOne(
+            {_id :req.params.id}, 
+            {
+                $inc: {dislikes: 1},
+                $push: {usersDisliked: req.auth.userId},
+            }
+        )  
+    }
+    async function removeDislikePost(){
+        await Post.updateOne(
+            {_id :req.params.id}, 
+            {
+                $inc: {dislikes: -1},
+                $pull: {usersDisliked: req.auth.userId}
+            }
+        ) 
     }
 };

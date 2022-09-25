@@ -1,31 +1,38 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import {getAPI } from "../utils/api";
+import { getAPI } from "../utils/api";
+
 
 
 function UserList() {
- const [users,setUsers] = useState([])
- 
-  
-    //  useEffect(function (){
-    //     getAPI().get("/api/user/suggests")
-    //     .then (res =>{
-    //         setUsers(res.data)
-    //     }) 
-    //     .catch(axios =>{})
-    //  },[] )
+
+    const [users, setUsers] = useState([]);
+
+
+    useEffect(() => {
+      getAPI().get('/api/user/')
+        .then(function (res) {
+          console.log(res.data)
+          setUsers(res.data)
+        })
+        .catch(function (res) {
+
+        })
+    }, []);
 
     return <>
-      <ul>
-        { users.map(user=><li>
-            <NavLink to={`/profil/${user.id}`}>
-                <img className="avatar" src={"/avatar/"+user.id+".jpg"}/>
-                <span className="name"> {user.name}</span>
-            </NavLink>
-        </li>)} 
-      </ul>
+      <section id="users">
+        <ul>
+          { users.map(user=><li key={user._id}>
+              <NavLink to={`/profil/${user.id}`}>
+                  <img height={25} width={25} className="avatar" src={user.avatar}/>
+                  <span className="name"> {user.name}</span>
+              </NavLink>
+          </li>)} 
+        </ul>
+      </section>
     </>
-}
 
+  }
 
-export default UserList
+  export default UserList;

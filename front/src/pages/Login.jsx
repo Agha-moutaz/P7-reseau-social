@@ -1,10 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import  { useNavigate } from "react-router-dom"
+import { AppContext } from "../app/context";
 import '../scss/login.scss'
 import { getAPI, setToken } from "../utils/api";
 import { login as loginValidator } from "../validators/login";
 
 function Login(){
+
+    const { dispatchLoginEvent } = useContext(AppContext);
+
     const [fields, setFields] = useState({
         email: "",
         password: ""
@@ -17,18 +21,19 @@ function Login(){
         event.stopPropagation()
 
         //validations
-        // const {error, value} = loginValidator.validate(fields, { abortEarly: false })
-        // if(error){
-        //     return alert('error')
-        // }
+        const {error, value} = loginValidator.validate(fields, { abortEarly: false })
+        if(error){
+            return alert('error validation')
+        }
         
         getAPI().post('/api/user/login', fields)
-            .then(function(res){
+            .then(function(res) {
                 setToken(res.data.token)
+                delete res.data.token
+                dispatchLoginEvent('LOGIN_SUCESS', res.data)
                 navigate('/')
             })
             .catch(function(res){
-                console.log(res)
                 alert('error')
             })
     }
@@ -44,7 +49,7 @@ function Login(){
                 <div className="fields">
                     <form action="" onSubmit={submit}>
                         <div className="field">
-                            <label for="">Email Address</label>
+                            <label htmlFor="">Email Address</label>
                             <input 
                                 type="text" 
                                 placeholder="email@exemple.org" 
@@ -58,7 +63,7 @@ function Login(){
                         </div>
             
                         <div className="field">
-                            <label for="">Password</label>
+                            <label htmlFor="">Password</label>
                             <input 
                                 type="password" 
                                 placeholder="*********" 

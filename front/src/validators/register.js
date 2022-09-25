@@ -14,8 +14,8 @@ const password = Joi.string()
     .regex(/^\w{6,12}$/)
     .required()
 
-export const registerValidator = Joi.object({
+export const register = Joi.object({
     email,
     password,
-    name,
+    name
 })

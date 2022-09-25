@@ -1,45 +1,58 @@
-import { useEffect, useState, createContext } from "react";
-import moment from 'moment';
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import PostContainer from "../components/PostContainer";
 import Post from "../components/Post";
 import NewPost from "../components/NewPost";
-import Side from "../components/Side";
 import UserList from "../components/UserList";
 import { getAPI } from "../utils/api";
-import {HomeContext} from "../app/context"
+import {HomeContext, AppContext} from "../app/context";
 import '../scss/home.scss'
+
 
 function Home() {
 
     const [posts, setPosts] = useState([])
-
+    const navigate = useNavigate(); 
     const dispatchPostEvent = (actionType, payload) => {
 		switch (actionType) {
 			case 'POST_ADDED':
-				setPosts([ ...posts, payload ]);
+				//setPosts([ ...posts, payload ]);
+                getAllPosts();
 				return;
 			default:
 				return;
 		}
 	};
 
-    
-
-    useEffect(() => {
+    const getAllPosts = function() {
         getAPI().get('/api/post/')
         .then(function(res) {
             setPosts(res.data)       
         })
         .catch(function(res){
-            alert("can't retreive posts")
+            handleApiError(res);
         })
-      }, []);
+    }
+
+    const { dispatchLoginEvent } = useContext(AppContext);
+    const handleApiError = (res) => {
+        if(res.response.status == 401) {
+            dispatchLoginEvent('LOGIN_EXPIRED', {})
+            navigate('/login')       
+        }
+    }
+
+    useEffect(() => {
+        getAllPosts();
+    }, []);
+
+      
 
 
     return <>
         <main id="index">
             <HomeContext.Provider value={{ posts, dispatchPostEvent }}>
-                <Side/>
+                <UserList/>
                 <PostContainer>
                     <NewPost />
                     {   
@@ -47,7 +60,6 @@ function Home() {
                         <Post post={post} key={post._id}/>)
                         
                     }
-                    <UserList/>
                 </PostContainer>
             </HomeContext.Provider>
         </main>

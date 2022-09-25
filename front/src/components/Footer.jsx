@@ -3,11 +3,11 @@ import {NavLink} from 'react-router-dom'
 
 function Footer(){
     return <footer>
-        <ul>
+        {/* <ul>
             <li>
                 <NavLink to="/">Mon lien</NavLink>
             </li>
-        </ul>
+        </ul> */}
     </footer>
 }
 

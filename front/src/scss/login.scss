@@ -87,17 +87,20 @@ header {
         }
 
         .fields { 
-
+        
             form { 
                 display: flex;
                 flex-flow: column;
                 row-gap: 1em;
-        
+               
+
                 .field {
                     display: flex;
                     flex-flow: column ;
                     row-gap: .5em;
+                    
 
+                    
                     input { 
                         border: 1px solid #dededede;
                         padding: .5em;

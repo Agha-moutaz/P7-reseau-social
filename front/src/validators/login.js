@@ -1,6 +1,5 @@
 import Joi from 'joi'
 
-
 const email = Joi.string()
     .email({ tlds: {allow: false} })
     .max(100)
@@ -12,5 +11,5 @@ const password = Joi.string()
 
 export const login = Joi.object({
     email,
-    password,
+    password
 })
