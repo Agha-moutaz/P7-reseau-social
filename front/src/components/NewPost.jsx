@@ -86,7 +86,7 @@ function NewPost() {
                         type="file"
                         accept="image/png, image/jpeg" />
                     <div className="upload" onClick={openInputFile}><FontAwesomeIcon icon={faPaperclip} /></div>
-                    <button className="publish" onClick={savePost}>Publier</button>
+                    <button className="yes" onClick={savePost}>Publier</button>
                 </div>
             </div>
             </div>

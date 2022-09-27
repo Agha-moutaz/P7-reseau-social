@@ -9,7 +9,7 @@ router.post('/', auth, multer, postCtrl.createPost);
 router.post('/:id/like', auth, postCtrl.likePost);
 router.get('/:id', auth, postCtrl.getOnePost);
 router.put('/:id', auth, multer, postCtrl.modifyPost);
-router.delete('/:id', auth, multer, postCtrl.deletePost);
+router.delete('/:id', [auth, multer], postCtrl.deletePost);
 
 
 

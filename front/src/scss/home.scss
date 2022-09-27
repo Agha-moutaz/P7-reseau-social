@@ -1,5 +1,6 @@
-$gray: #f1f1f1;
+$gray: #f3f3f3;
 $blue: #478ccc;
+$red: #db1d1d;
 $grayDark: #ddd;
 
 *{
@@ -138,6 +139,42 @@ header {
 
         }
 
+        .button{
+            cursor: pointer;
+        }
+
+    .yes, .no{
+        //    margin-left: 300px;
+        //    margin-top: 2em;
+           cursor: pointer;
+            padding: .5em 1em;
+            color: white;
+            border: none;
+            border-radius: .5em;
+            background: $blue;
+            font-size: 1.1em;
+        }
+    .no {
+        background-color: $red;
+    }
+
+    .post__edit{
+        h2{
+            font-size: 28px;
+            text-align: center;
+            margin-top: 0;
+        }
+        .post__choix{
+            display: flex;
+            justify-content: space-evenly;
+            button {
+                padding: .6em 3em;
+                font-weight: bold;
+            }  
+        }
+
+    }
+
 	#posts { 
         //background: $gray;
         width: 600px;
@@ -161,22 +198,6 @@ header {
                 background: white;
                 box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
                 border-radius: 1em;
-
-                .post__supprission{
-                    font-size: 32px;
-
-                        h2{
-                            font-size: 32px;
-                        }
-                    .post__choix{
-                        display: flex;
-                        justify-content: center;
-                        
-                    }
-                    button{
-                    padding-left: 15px;
-                    }
-                }
 
                 .post__edition {
                     display: flex;
@@ -267,22 +288,6 @@ header {
                         flex-direction: row nowrap;
                         column-gap: 1em;
                         justify-content: end;
-            
-                        .button{
-                            cursor: pointer;
-                        }
-                        .publish{
-                        //    margin-left: 300px;
-                        //    margin-top: 2em;
-                           cursor: pointer;
-                            padding: .5em 1em;
-                            color: white;
-                            border: none;
-                            border-radius: .5em;
-                            background: $blue;
-                            font-size: 1.1em;
-                        }
-                        
                     }
             
                     .thumbs { 
@@ -312,6 +317,7 @@ header {
                         }
                     }
                 }
+                
                     
 			}
 		}

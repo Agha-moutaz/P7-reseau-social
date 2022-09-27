@@ -47,7 +47,7 @@ function Profile() {
     async function fetchUser()  {
       try{
         const userData = await getAPI().get('/api/user/getUserByToken')
-        console.log(userData.data)
+        console.log('========>', userData.data)
         //setUser(user.data)
         setFields({
           name: userData.data.name,
@@ -70,14 +70,14 @@ function Profile() {
     getAPI().delete('/api/user/'+fields.id)
     
         .then(function (res) {
-          console.log(res.data)
+          console.log('-------->',res.data)
         })
         .catch(function (err) {
           console.log(err)
         })
     }
     const toggelModalDeleteUser = () => {
-      setIsOpenModalDeleteUser(!setIsOpenModalDeleteUser)
+      setIsOpenModalDeleteUser(!isOpenModalDeleteUser)
     }
     const modalstyle= {
       content: {
@@ -93,22 +93,21 @@ function Profile() {
       }
     }
 
-
   return <>
     <main id="auth">
     <Modal 
-            isOpen={isOpenModalDeleteUser}
-            style={modalstyle}
-          >
-          
-          <div className="post__supprission"> 
-            <h2>Voulez vous supprimer votre compte?</h2>
-            <div className="post__choix">
-              <button onClick={deleteUser}>Oui</button>
-              <button onClick={toggelModalDeleteUser}>Non</button>
-            </div>
-          </div>
-          </Modal>
+      isOpen={isOpenModalDeleteUser}
+      style={modalstyle}
+    >
+      <div className="post__edit"> 
+        <h2>Voulez vous supprimer votre compte?</h2>
+        <div className="post__choix">
+          <button className="yes"  onClick={deleteUser}>Oui</button>
+          <button className="no"  onClick={toggelModalDeleteUser}>Non</button>
+        </div>
+      </div>
+    </Modal>
+
       <section id="register" className="form">
         <div className="form__container">
           <div className="top">
@@ -119,8 +118,9 @@ function Profile() {
 
               <div className="field">
                 <label htmlFor="">Name</label>
-                <input
+                <input 
                   type="text"
+                  autoComplete="false"
                   value={fields.name}
                   onChange={function (event) {
                     setFields({
@@ -165,10 +165,8 @@ function Profile() {
                 <button >Update</button>
               </div>
               <div className="field" id= "suprimer">
-                <button  onClick={deleteUser}>Supprimer mon compte</button>
+                <button className="no"  onClick={toggelModalDeleteUser}>Supprimer mon compte</button>
               </div>
-              
-              
             </form>
           </div>
         </div>

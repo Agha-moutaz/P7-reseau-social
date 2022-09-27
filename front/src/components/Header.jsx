@@ -1,13 +1,19 @@
 import { useContext, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AppContext } from "../app/context";
-import { getAPI } from "../utils/api";
+import { getAPI, removeToken } from "../utils/api";
 
 
 function Header(props){
 
     const navigate = useNavigate()
     const { dispatchLoginEvent } = useContext(AppContext);
+
+    const logout = () => {
+        removeToken();
+        dispatchLoginEvent('LOGIN_EXPIRED', {})
+        navigate('/login') 
+    }
 
     useEffect(() => {
         getAPI().get('/api/user/getUserByToken')
@@ -32,8 +38,7 @@ function Header(props){
                         ? 
                         <>
                         <li className="menu-link"><Link to="/profile" replace>Profile</Link></li>
-                        <li className="menu-link"><Link to="#" replace>Settings</Link></li>
-                        <li className="menu-link"><Link to="login" replace>Se déconnecter</Link></li>
+                        <li className="menu-link"><Link to="login" onClick={logout} replace>Se déconnecter</Link></li>
                         </>
                         :
                         <>

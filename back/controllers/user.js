@@ -93,8 +93,6 @@ exports.getAllUsers = (req, res, next) => {
 
 exports.updateUser = async(req, res, next) => {
 
-    console.log (req.body)
-
     const token = req.headers.authorization.split(' ')[1];
     const decodedToken = jwt.verify(token, `${process.env.TOKEN_SECRET}`);
     const userId = decodedToken.userId;
@@ -111,17 +109,19 @@ exports.updateUser = async(req, res, next) => {
             avatar: req.file ? `${req.protocol}://${req.get('host')}/images/${req.file.filename}` : user.avatar
         };
 
-        sharp(`${__dirname}/../images/${req.file.filename}`)
-        .resize(50, 50, {
-            kernel: sharp.kernel.nearest,
-            withoutEnlargement: true,
-            withoutReduction: true,
-            fit: 'contain',
-        })
-        .toFile(`${__dirname}/../images/avatar-${req.file.filename}`)
-        .then(() => {
-            console.log("RESIZED....")
-        });
+        if(req.file && req.file.filename) {
+            sharp(`${__dirname}/../images/${req.file.filename}`)
+            .resize(50, 50, {
+                kernel: sharp.kernel.nearest,
+                withoutEnlargement: true,
+                withoutReduction: true,
+                fit: 'contain',
+            })
+            .toFile(`${__dirname}/../images/avatar-${req.file.filename}`)
+            .then(() => {
+                console.log("RESIZED....")
+            });
+        }
 
         if (!user) {
             return res.status(404).json ({message: 'not found'})
