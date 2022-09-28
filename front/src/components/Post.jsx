@@ -1,19 +1,22 @@
 import {useState, useEffect, useContext, useRef } from "react";
 import {
-    faHeart,
-    faHeartBroken,
-    faClose,
-    faFileEdit,
+  faHeart,
+  faHeartBroken,
+  faClose,
+  faFileEdit,
 } from '@fortawesome/free-solid-svg-icons'
 import moment from 'moment';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { getAPI } from "../utils/api";
 import Modal from 'react-modal'
 import ModifyPost from "./ModifyPost";
+import { AppContext } from "../app/context";
 
  
 function PostContainer(props) {
-console.log("*******", props)
+
+  const { currentUser } = useContext(AppContext);
+
   const [likeNumber, setLikeNumber] = useState()
   const [dislikeNumber, setDislikeNumber] = useState()
   const [isOpenModalDeletePost, setIsOpenModalDeletePost] = useState(false)
@@ -49,7 +52,7 @@ console.log("*******", props)
       refPost.current.remove();
       toggelModalDeletePost();
     } catch (error) {
-      console.log(error)
+      toggelModalDeletePost();
     }
   }
 
@@ -103,12 +106,17 @@ console.log("*******", props)
 
 
       <div className="post__edition"> 
-        <div className="bottom__top">
-          <FontAwesomeIcon icon={ faFileEdit} onClick={ toggelModalModifyPost}/>   
-        </div>
-        <div className="bottom__top">
-          <FontAwesomeIcon icon={ faClose} onClick={toggelModalDeletePost}  />
-        </div>
+      {currentUser._id == props.post.user._id || currentUser.isAdmin ?
+        <>
+          <div className="bottom__top">
+            <FontAwesomeIcon icon={ faFileEdit} onClick={ toggelModalModifyPost}/>   
+          </div>
+          <div className="bottom__top">
+            <FontAwesomeIcon icon={ faClose} onClick={toggelModalDeletePost}  />
+          </div>
+        </>
+        : null
+        }
           </div>
           <div className="post__top">
             <div className="avatar">

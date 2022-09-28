@@ -9,6 +9,7 @@ import { AppContext, HomeContext } from '../app/context'
 
 
 
+
 function ModifyPost(props) {
 
     const { dispatchPostEvent } = useContext(HomeContext);
@@ -74,8 +75,9 @@ function ModifyPost(props) {
                     ref={fileRef}  
                     type="file"
                     accept="image/png, image/jpeg" />
-                <div className="upload" onClick={openInputFile}><FontAwesomeIcon icon={faPaperclip} /></div>
+                
                 <button className="no" onClick={props.toggelModalModifyPost } >Annuler</button>
+                <div className="upload" onClick={openInputFile}><FontAwesomeIcon icon={faPaperclip} /></div>
                 <button className="yes" onClick={savePost}>Publier</button>
             </div>
         </div>

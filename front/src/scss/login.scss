@@ -1,7 +1,4 @@
-*{
-    font-family: 'Roboto', sans-serif;
-  }
-  
+
   
 html{
     margin: 0;
@@ -35,7 +32,6 @@ header {
                 li {
                     padding: 15px;
                     padding-bottom: 1px;
-                    line-height: 45px;
                     border-top: transparent solid 3px;
 
                     a {
@@ -144,6 +140,12 @@ header {
     }
 }
 
-    
-    
-            
+@media all and (max-width:768px) {
+ 
+        
+    .menu-link{
+      display: none;
+    }
+
+  
+}

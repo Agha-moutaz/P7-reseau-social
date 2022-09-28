@@ -21,13 +21,11 @@ function UserList() {
     }, []);
 
     return <>
-      <section id="users">
+      <section className="user__list" id="users">
         <ul>
           { users.map(user=><li key={user._id}>
-              <NavLink to={`/profil/${user.id}`}>
-                  <img height={25} width={25} className="avatar" src={user.avatar}/>
-                  <span className="name"> {user.name}</span>
-              </NavLink>
+            <div className="avatar" ><img src={user.avatar}/></div>
+            <span className="name"> {user.name}</span>   
           </li>)} 
         </ul>
       </section>

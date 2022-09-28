@@ -1,28 +1,39 @@
-*{
-    font-family: 'Lato', sans-serif;
-  }
-  
+
 ul{
     display: flex;
     list-style-type: none;
     flex-direction: column;
     margin: 0px;
     padding: 0px;
+   
     li {
         padding: 15px;
         padding-bottom: 1px;
-        line-height: 45px;
         border-top: transparent solid 3px;
-
+        display: flex;
+        flex-flow: row nowrap;
+        column-gap: 1em;
+        align-items: center;
         img{
             border: solid 1px #ddd;
             border-radius: 50%;
             padding: 1px 1px;
         }
         .name{
-            color: blue;
+            color:black;
+            font-size: 16px;
+           
+           
             
         }
     }
     
+}
+
+
+@media all and (max-width:768px) {
+ 
+   .user__list{
+        display: none;
+    }
 }

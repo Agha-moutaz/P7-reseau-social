@@ -59,7 +59,7 @@ exports.modifyPost = async(req, res, next) => {
 
         if (post.user != req.auth.userId || !req.auth.isAdmin) {
             res.status(403).json({
-                message: 'Non-autorisé'
+                message: 'Non autorisé'
             });
         } else {
             await Post.updateOne({
@@ -79,13 +79,10 @@ exports.deletePost = (req, res, next) => {
     console.log(req.params)
     Post.findOne({ _id: new ObjectId(req.params.id)})
         .then((post) => {
-            console.log(post)
             if(!post){
                 return res.status(404).json({ message: 'post non trouvé'})
             }
-            if (post.user != req.auth.userId){
-                console.log(post.user)
-                console.log(req.auth)
+            if (post.user != req.auth.userId && !req.auth.isAdmin){
                 res.status(403).json({ message: 'Non autorisé'});
             }else{
                 if(post.imageUrl){

@@ -2,7 +2,13 @@ import { useContext, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { AppContext } from "../app/context";
 import { getAPI, removeToken } from "../utils/api";
-
+import {
+    faLock,
+    faUser,
+    faClose,
+    faFileEdit,
+  } from '@fortawesome/free-solid-svg-icons'
+  import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 function Header(props){
 
@@ -30,15 +36,37 @@ function Header(props){
    
     return <header>
         <div className="global-wrapper h-container">
+            <Link to="/">
             <div className="logo"></div>
-            <nav>
+            </Link>
+            <nav className="large">
                 <ul>
                     {   
                         props.currentUser?.logged
                         ? 
                         <>
+                        <li><div className="avatar"><img  src={props.currentUser.avatar}/></div></li>
                         <li className="menu-link"><Link to="/profile" replace>Profile</Link></li>
                         <li className="menu-link"><Link to="login" onClick={logout} replace>Se déconnecter</Link></li>
+                        </>
+                        :
+                        <>
+                        <li className="menu-link"><Link to="/login" replace>s'identifier</Link></li>
+                        <li className="menu-link"><Link to="/register" replace>s'inscrire</Link></li>
+                        </>
+                    }
+                    
+                </ul>
+            </nav>
+            <nav className="mobile">
+                <ul>
+                    {   
+                        props.currentUser?.logged
+                        ? 
+                        <>
+                        <li><div className="avatar"><img  src={props.currentUser.avatar}/></div></li>
+                        <li className="menu-link"><Link to="/profile" replace><FontAwesomeIcon icon={ faUser} /></Link></li>
+                        <li className="menu-link"><Link to="login" onClick={logout} replace><FontAwesomeIcon icon={faLock} /></Link></li>
                         </>
                         :
                         <>

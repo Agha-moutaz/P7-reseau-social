@@ -9,6 +9,7 @@ import {HomeContext, AppContext} from "../app/context";
 import '../scss/home.scss'
 
 
+
 function Home() {
 
     const [posts, setPosts] = useState([])
@@ -36,7 +37,7 @@ function Home() {
 
     const { dispatchLoginEvent } = useContext(AppContext);
     const handleApiError = (res) => {
-        if(res.response.status == 401) {
+        if(res.response.status === 401) {
             dispatchLoginEvent('LOGIN_EXPIRED', {})
             navigate('/login')       
         }
