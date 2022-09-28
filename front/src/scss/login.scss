@@ -34,17 +34,17 @@ header {
                     padding-bottom: 1px;
                     border-top: transparent solid 3px;
 
-                    a {
-                        font-size: 14px;
-                        color: #444444;
-                        text-decoration: none;
-                    }
+                    // a {
+                    //     font-size: 14px;
+                    //     // color: #444444;
+                    //     // text-decoration: none;
+                    // }
                 }
             }
-            a:hover {
-                color: #0065FC;
+            // a:hover {
+            //     color: #0065FC;
                
-            }   
+            // }   
             
             .menu-link:hover {
                 border-bottom: #0065FC solid 3px;
@@ -143,9 +143,7 @@ header {
 @media all and (max-width:768px) {
  
         
-    .menu-link{
-      display: none;
-    }
+   
 
   
 }
