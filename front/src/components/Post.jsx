@@ -151,10 +151,6 @@ function PostContainer(props) {
                   <FontAwesomeIcon icon={faHeartBroken} onClick={()=>{like(-1)}} />
                   <span>{dislikeNumber}</span>
                 </div>
-                {/* <div className="button button--comment">
-                  <FontAwesomeIcon icon={faComment} />
-                  <span> {props.post.comment?.length}</span>
-                </div> */}
               </div>
           </div>
         </div>
