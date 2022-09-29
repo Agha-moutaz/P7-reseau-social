@@ -1,7 +1,4 @@
 # P7-reseau-social
-création un resea social
-
-# P7-reseau-social
 Création d'un reseau social d'entreprise
 
 ## Installation
@@ -17,8 +14,8 @@ Ouvrez un terminal et placez vous dans le répertoire "front" du projet.
 Exécutez les commandes suivantes :
 
 ```
-  yarn
-  yarn start
+  npm install
+  npm start
 ```
 
 ### Backend
@@ -33,7 +30,7 @@ yarn start
 ### Accéder à l'application
 Ouvrez votre navigateur et tapez l'URL suivant: http://localhost:3000/
 
-Cliquez sur l'onglet "Inscription"
+Cliquez sur l'onglet "s'inscrire"
 Créer un nouveau compte utilisateur et renseignez ensuite l'adresse email choisi ainsi que le mot de passe dans l'onglet "Connexion"
 
 Vous avez maintenant accès à l'application !
