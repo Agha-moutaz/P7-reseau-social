@@ -23,8 +23,8 @@ function Profile() {
   const  saveUser = async function(event) {
     event.preventDefault()
     event.stopPropagation()
-    //validations
-    //const {error, value} = postValidator.validate(fields, { abortEarly: false })
+    // validations
+    // const {error, value} = postValidator.validate(fields, { abortEarly: false })
     // if(error){
     //     return alert('error')
     // }
@@ -161,11 +161,11 @@ function Profile() {
                 <button onClick={openInputFile}>Update avatar</button>
               </div>
 
-              <div className="field">
-                <button >Update</button>
-              </div>
-              <div className="field" id= "suprimer">
-                <button className="no"  onClick={toggelModalDeleteUser}>Supprimer mon compte</button>
+              {/* <div className="field">
+                <button className="no" >Update</button>
+              </div> */}
+              <div className="field" >
+                <button className="no" id= "suprimer" onClick={toggelModalDeleteUser}>Supprimer mon compte</button>
               </div>
             </form>
           </div>
