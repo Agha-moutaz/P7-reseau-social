@@ -1,14 +1,17 @@
-import { useEffect, useRef, useState } from "react";
-import { faPaperclip } from "@fortawesome/free-solid-svg-icons";
+import { useContext, useEffect, useRef, useState } from "react";
+import { faImagePortrait } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import '../scss/login.scss'
 import { getAPI } from "../utils/api";
-import { register as registerValidator } from "../validators/register";
 import Modal from 'react-modal'
+import { AppContext } from "../app/context";
 
 
 
 function Profile() {
+
+  const { dispatchLoginEvent } = useContext(AppContext);
+
   //const [user, setUser] = useState({})
   const [fields, setFields] = useState({
     email: "",
@@ -37,6 +40,8 @@ function Profile() {
     }
     try {
         const result = await getAPI('formData').post('/api/user/updateUser', formData);
+        console.log(result);
+        dispatchLoginEvent('LOGIN_SUCESS', result.data.user)
     } catch (error) {
         alert('error')
     }
@@ -67,10 +72,11 @@ function Profile() {
   }
 
   const deleteUser =function(event){
+    console.log('-------->$$$$$')
     getAPI().delete('/api/user/'+fields.id)
     
         .then(function (res) {
-          console.log('-------->',res.data)
+          
         })
         .catch(function (err) {
           console.log(err)
@@ -111,7 +117,7 @@ function Profile() {
       <section id="register" className="form">
         <div className="form__container">
           <div className="top">
-            <h1>Profile</h1>
+            <h1>Profil</h1>
           </div>
           <div className="fields">
             <form action="" onSubmit={saveUser}>
@@ -151,19 +157,26 @@ function Profile() {
                   }} />
               </div>
 
-              <div className="field">
+              <div className="post__choix">
                 <input 
-                    className="hidden"
-                    name="image"
-                    ref={fileRef}  
-                    type="file"
-                    accept="image/png, image/jpeg" />
-                <button onClick={openInputFile}>Update avatar</button>
+                      className="hidden"
+                      name="image"
+                      ref={fileRef}  
+                      type="file"
+                      accept="image/png, image/jpeg" />
+                  
+                  <div className="image" onClick={openInputFile}>
+                      <span>Ajouter une image</span>
+                      <FontAwesomeIcon icon={faImagePortrait} />
+                  </div>
               </div>
 
-              {/* <div className="field">
+
+
+
+              <div className="field">
                 <button className="no" >Update</button>
-              </div> */}
+              </div> 
               <div className="field" >
                 <button className="no" id= "suprimer" onClick={toggelModalDeleteUser}>Supprimer mon compte</button>
               </div>

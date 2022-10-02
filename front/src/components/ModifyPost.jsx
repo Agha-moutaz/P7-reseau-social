@@ -2,7 +2,7 @@ import { useState, useContext, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import FormData from 'form-data'
 import { getAPI } from "../utils/api";
-import { faPaperclip} from '@fortawesome/free-solid-svg-icons'
+import { faPaperclip, faImage, faClose} from '@fortawesome/free-solid-svg-icons'
 import { postValidator } from "../validators/post";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { AppContext, HomeContext } from '../app/context'
@@ -48,7 +48,7 @@ function ModifyPost(props) {
         formData.append("text", value.text);
 
         try {
-            const result = await getAPI('formData').post('/api/post/', formData);
+            const result = await getAPI('formData').put(`/api/post/${props.post._id}`, formData);
             dispatchPostEvent('POST_ADDED', result.data)
             setText("");
             fileRef.current.value = ""
@@ -61,6 +61,9 @@ function ModifyPost(props) {
 
     return <>
         <div className="post__edit">
+        <div className="close">
+            <FontAwesomeIcon icon={ faClose} onClick={props.toggelModalModifyPost}  />
+          </div>
           <textarea 
             rows="5" cols="50"
             value={text}
@@ -76,9 +79,13 @@ function ModifyPost(props) {
                     type="file"
                     accept="image/png, image/jpeg" />
                 
-                <button className="no" onClick={props.toggelModalModifyPost } >Annuler</button>
-                <div className="upload" onClick={openInputFile}><FontAwesomeIcon icon={faPaperclip} /></div>
-                <button className="yes" onClick={savePost}>Publier</button>
+                <div className="image" onClick={openInputFile}>
+                    <span>Ajouter une image</span>
+                    <FontAwesomeIcon icon={faImage} />
+                </div>
+            </div>
+            <div className="post__publish">
+                <button className="publish" onClick={savePost}>Publier</button>
             </div>
         </div>
     </>

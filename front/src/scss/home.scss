@@ -2,11 +2,10 @@ $gray: #f3f3f3;
 $blue: #478ccc;
 $red: #db1d1d;
 $grayDark: #ddd;
+$black: rgb(26, 20, 20); 
+$green: rgb(102, 160, 26);
 
-
-
-  
-  
+ 
 html{
     margin: 0;
     
@@ -22,6 +21,43 @@ textarea:focus-visible, textarea:focus {
 .hidden {
     display: none;
 }
+
+.post__choix{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    padding-bottom: 2em;
+ 
+    .hidden{
+        
+        align-items: center;
+
+    }
+    button {
+        padding: 0 3em;
+        font-weight: bold;
+    }  
+    .upload{
+        margin-top: 15px;
+        font-size: 2em;
+        cursor: pointer;
+    }
+    .image {
+        color: $green;
+        font-size: 2em;
+        display: flex;
+        align-items: center;
+    }
+    .image svg {
+        cursor: pointer;
+    }
+    .image span {
+        color: $black;
+        font-size: 1.2rem;
+        margin-right: 1em;
+    }
+}
+
 
 .avatar { 
 
@@ -157,9 +193,11 @@ header {
             cursor: pointer;
         }
 
-    .yes, .no{
-        //    margin-left: 300px;
-        //    margin-top: 2em;
+    .post__publish {
+        width: 100%;
+    }
+    .yes, .no, .publish{
+        height: 2em;
            cursor: pointer;
             padding: .5em 1em;
             color: white;
@@ -168,53 +206,60 @@ header {
             background: $blue;
             font-size: 1.1em;
         }
+    .publish {
+        width: 100%;
+    }
     .no {
         background-color: $red;
     }
 
     .post__edit{
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+        
         h2{
-            font-size: 28px;
+            font-size: 1.6em;
             text-align: center;
             margin-top: 0;
         }
         textarea {
             outline: none;
-            border-color: $blue !important;
-          justify-items: center;
-          align-content: center;
-          margin: 0 120px 25px 120px;
-          
-         
-         
-      
+            box-sizing: border-box;
+            border-color: $blue !important;         
+            border-radius: 1em;
+            font-size: 1.2em;
+            margin: 0 0 2em 0;
+            width: 100%;
+            padding: 0.5em;
         }
-        .post__choix{
-            display: flex;
-            justify-content: space-evenly;
-         
-            
-            .hidden{
-                
-                align-items: center;
 
-            }
-            button {
-                padding: .6em 3em;
-                font-weight: bold;
-            }  
-            .upload{
-                margin-top: 15px;
-                font-size: 2em;
-                cursor: pointer;
-            }
+        .close {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin: 4px 4px 0 0;
+            width: 2em;
+            height: 2em;
+            background: $gray;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $grayDark;
+            cursor: pointer;
+        }
+        .close:hover {
+            background-color: $grayDark;
+            color: $black;
         }
 
     }
 
 	.post__stream { 
         //background: $gray;
-        width: 600px;
+        width: 640px;
        // border-radius: 2em;
 
 		.posts__container {

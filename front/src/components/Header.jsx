@@ -3,10 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { AppContext } from "../app/context";
 import { getAPI, removeToken } from "../utils/api";
 import {
-    faLock,
-    faUser,
-    faClose,
-    faFileEdit,
+    faUnlock
   } from '@fortawesome/free-solid-svg-icons'
   import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -46,7 +43,7 @@ function Header(props){
                         ? 
                         <>
                         <li><Link to="/profile" replace><div className="avatar" ><img  src={props.currentUser.avatar}/></div></Link></li>
-                        <li className="menu-link"><Link to="login" onClick={logout} replace><FontAwesomeIcon className="icon" icon={faLock} /></Link></li>
+                        <li className="menu-link"><Link to="login" onClick={logout} replace><FontAwesomeIcon className="icon" icon={faUnlock} /></Link></li>
                         {/* <li className="menu-link"><Link to="/profile" replace>Profile</Link></li> */} 
                         {/* <li className="menu-link"><Link to="login" onClick={logout} replace>Se déconnecter</Link></li> */}
                         </>

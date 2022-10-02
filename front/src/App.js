@@ -17,6 +17,7 @@ function App() {
 
   const [currentUser, setCurrentUser] = useState({})
   const dispatchLoginEvent = (actionType, payload) => {
+    console.log(actionType, payload);
 		switch (actionType) {
 			case 'LOGIN_SUCESS':
         payload.logged = true

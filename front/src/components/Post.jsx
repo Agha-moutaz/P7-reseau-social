@@ -21,10 +21,6 @@ function PostContainer(props) {
   const [dislikeNumber, setDislikeNumber] = useState()
   const [isOpenModalDeletePost, setIsOpenModalDeletePost] = useState(false)
   const [isOpenModalModifyPost, setIsOpenModalModifyPost] = useState(false)
-  // const [comment, setComment] = useState({
-  //   content: '',
-  //   imageUrl: '',
-  // });
 
   let refPost = useRef(null);
 
@@ -64,15 +60,17 @@ function PostContainer(props) {
     }
     const modalstyle= {
       content: {
-
         width: '600px',
-        padding: '4em 2em',
+        padding: '4em  1em 0.4em 1em',
         top: '50%',
         left: '50%',
         right: 'auto',
         bottom: 'auto',
         marginRight: '-50%',
+        borderRadius: '1.2em',
+        border: 'non',
         transform: 'translate(-50%, -50%)',
+        boxShadow: '0px 0px 20px #bbb',
       }
     }
 

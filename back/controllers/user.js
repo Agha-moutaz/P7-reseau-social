@@ -34,9 +34,7 @@ User.findOne({email: req.body.email})
                 res.status(401).json( {message: 'paire identifiant/mot de passe incorrect'});
             } else {
                 res.status(200).json({
-                    userId: user._id,
-                    name: user.name,
-                   // isAdmin:user.isAdmin,
+                    ...user.toJSON(),
                     token: jwt.sign(
                         {userId: user._id},
                         `${process.env.TOKEN_SECRET}`,
@@ -66,7 +64,6 @@ exports.getUserByToken = async (req, res, next) => {
         const token = req.headers.authorization.split(' ')[1];
         const decodedToken = jwt.verify(token, `${process.env.TOKEN_SECRET}`);
         const userId = decodedToken.userId;
-        console.log(userId);
         if (userId) {
             User.findOne({_id: userId})
             .then((result) => {console.log(result); res.status(200).json(result)}) 
@@ -131,7 +128,11 @@ exports.updateUser = async(req, res, next) => {
             _id: userId
         }, userObject)
 
-        res.status(200).json({message: 'user mis à jour!'})
+        const newUser = await User.findOne({
+            _id: userId
+        })
+
+        res.status(200).json({message: 'user mis à jour!', user: newUser.toJSON()})
         
     }
     catch(error) {
@@ -149,8 +150,6 @@ exports.updateUser = async(req, res, next) => {
         User.findOne({ _id: req.params.id}).remove()
             .then((user) => {
                 if (user._id != req.auth.userId){
-        console.log(user._id)
-        console.log(req.auth.userId)
 
                     res.status(403).json({ message: 'Non autorisé'});
                 }else{

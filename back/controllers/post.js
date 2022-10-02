@@ -37,9 +37,11 @@ exports.getAllPosts = (req, res, next) => {
 };
 
 exports.modifyPost = async(req, res, next) => {
-    var postObject = req.file ? {
-        ...JSON.parse(req.body.post),
-        } : {
+
+    console.log(req.body)
+    console.log(req.body.post)
+    console.log(req.file)
+    var postObject = {
         ...req.body
     };
     if (req.file) {
@@ -57,7 +59,7 @@ exports.modifyPost = async(req, res, next) => {
             return res.status(404).json ({message: 'not found'})
         }
 
-        if (post.user != req.auth.userId || !req.auth.isAdmin) {
+        if (post.user != req.auth.userId && !req.auth.isAdmin) {
             res.status(403).json({
                 message: 'Non autorisé'
             });
@@ -76,7 +78,7 @@ exports.modifyPost = async(req, res, next) => {
 };
 
 exports.deletePost = (req, res, next) => {
-    console.log(req.params)
+
     Post.findOne({ _id: new ObjectId(req.params.id)})
         .then((post) => {
             if(!post){
